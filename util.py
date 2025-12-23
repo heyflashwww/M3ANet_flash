@@ -224,7 +224,6 @@ def info_nce_loss(eeg_features, img_features, tau=0.1):
     batch_size = eeg_features.shape[0]
 
     pos_logits = torch.exp(F.cosine_similarity(eeg_features, img_features, dim=-1) / tau)
-    pos_logits = torch.sum(pos_logits)
 
     neg_logits = torch.empty(batch_size, device=eeg_features.device)
 
@@ -264,3 +263,4 @@ def loss_contrast(net, X, mrstftloss, **kwargs):
     info_nce += info_nce
 
     return loss, info_nce
+
